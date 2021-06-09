@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AppActivity">
+    tools:context=".PokemonActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="61dp"
-        android:layout_marginLeft="61dp"
-        android:layout_marginTop="157dp"
-        android:onClick="startPokemon"
-        android:text="@string/btnPokemon"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="22dp"
+        android:onClick="goBack"
+        android:text="@string/btnBack"
         app:backgroundTint="@color/light_red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/btnPokemon" />
+        tools:text="@string/btnBack" />
 </androidx.constraintlayout.widget.ConstraintLayout>

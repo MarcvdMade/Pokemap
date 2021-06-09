@@ -2,4 +2,6 @@
     <string name="app_name">Pokemap</string>
     <string name="logoImg">Pokeball</string>
     <string name="appTitle">Pokémap</string>
+    <string name="btnPokemon">Pokémon</string>
+    <string name="btnBack">Go back</string>
 </resources>

@@ -9,7 +9,7 @@ import android.os.Handler;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int DISPLAY_COUNT = 5000;
+    private final static int DISPLAY_COUNT = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
