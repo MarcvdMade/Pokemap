@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -60,11 +64,29 @@ public class PokemonActivity extends AppCompatActivity {
     }
 
     private void showPokemon(JSONObject data) {
+        //        get layout
+        LinearLayout pokemonLayout = findViewById(R.id.pokemonLayout);
+
         try {
             JSONArray pokemon = (JSONArray)data.get("results");
+            for (int i = 0; i < pokemon.length(); i++) {
+                JSONObject p = (JSONObject)pokemon.get(i);
+
+//              Get pokemon attributes
+                String name = (String)p.get("name");
+                Log.d(POKEMON_LOG, name);
+
+                Button pokemonBtn = new Button(this);
+                pokemonBtn.setText(name);
+                pokemonBtn.setId(i);
+
+                pokemonLayout.addView(pokemonBtn);
+
+                String url = (String)p.get("url");
+                Log.d(POKEMON_LOG, url);
+            }
         } catch (JSONException e) {
             Log.e(POKEMON_LOG, "JSON exeption error");
-            e.printStackTrace();
         }
     }
 
