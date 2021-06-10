@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pokemap">
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".AppActivity"/>
         <activity android:name=".PokemonActivity" />
         <activity android:name=".AppActivity" />
         <activity android:name=".MainActivity">

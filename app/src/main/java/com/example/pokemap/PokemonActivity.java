@@ -3,11 +3,13 @@ package com.example.pokemap;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -27,7 +29,7 @@ import java.util.Objects;
 
 public class PokemonActivity extends AppCompatActivity {
 
-    private final static String URL = "https://pokeapi.co/api/v2/pokemon/";
+    private final static String URL = "https://pokeapi.co/api/v2/pokemon?limit=20";
     private final static String POKEMON_LOG = "Pokemon-API";
 
     @Override
@@ -66,9 +68,11 @@ public class PokemonActivity extends AppCompatActivity {
     private void showPokemon(JSONObject data) {
         //        get layout
         LinearLayout pokemonLayout = findViewById(R.id.pokemonLayout);
+        LinearLayout pageBtnLayout = findViewById(R.id.pageBtnLayout);
 
         try {
             JSONArray pokemon = (JSONArray)data.get("results");
+
             for (int i = 0; i < pokemon.length(); i++) {
                 JSONObject p = (JSONObject)pokemon.get(i);
 
@@ -86,8 +90,9 @@ public class PokemonActivity extends AppCompatActivity {
                 Log.d(POKEMON_LOG, url);
             }
         } catch (JSONException e) {
-            Log.e(POKEMON_LOG, "JSON exeption error");
+            Log.e(POKEMON_LOG, "JSON exception error");
         }
+
     }
 
     public void goBack(View view) {

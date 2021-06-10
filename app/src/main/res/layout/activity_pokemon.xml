@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:overScrollMode="ifContentScrolls"
+    android:scrollbarAlwaysDrawHorizontalTrack="true"
     tools:context=".PokemonActivity">
 
     <Button
@@ -12,29 +14,65 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="7dp"
         android:onClick="goBack"
         android:text="@string/btnBack"
         app:backgroundTint="@color/light_red"
-        app:layout_constraintBottom_toTopOf="@+id/pokemonLayout"
+        app:layout_constraintBottom_toTopOf="@+id/pokemonScroll"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/btnBack" />
 
-    <LinearLayout
-        android:id="@+id/pokemonLayout"
+    <ScrollView
+        android:id="@+id/pokemonScroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/pageBtnLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2">
+
+        <LinearLayout
+            android:id="@+id/pokemonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/pageBtnLayout"
+        android:layout_width="409dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="1dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/pokemonScroll">
+
+        <Button
+            android:id="@+id/previousBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="@string/previousBtn" />
+
+        <Button
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:text="@string/nextBtn" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
