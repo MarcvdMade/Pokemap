@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,5 +52,11 @@ public class SettingsActivity extends AppCompatActivity {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+    }
+
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+        Log.d(LOG_SETTINGS, "test");
     }
 }

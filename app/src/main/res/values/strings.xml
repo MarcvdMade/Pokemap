@@ -25,4 +25,5 @@
     <string name="darkModeCategory">Dark Mode</string>
     <string name="nextBtn">Next</string>
     <string name="previousBtn">Previous</string>
+    <string name="app_settings">App</string>
 </resources>

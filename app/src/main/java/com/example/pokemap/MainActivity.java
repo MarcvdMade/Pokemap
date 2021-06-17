@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
 //        check the darkMode setting
-        SettingsActivity.checkDarkMode(this);
+//        SettingsActivity.checkDarkMode(this);
 
 //        log loading
         Log.d(LOADING_LOG, "loading...");
