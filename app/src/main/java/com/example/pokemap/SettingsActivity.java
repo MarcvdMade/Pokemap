@@ -6,6 +6,7 @@ import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private final static String LOG_SETTINGS = "settings-log";
 
     private final static String DARK_MODE_KEY = "dark_mode_preference";
@@ -43,6 +44,18 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+        super.onPause();
+    }
+
     public static void checkDarkMode(Context context) {
         //        check for darkmode
         boolean currentNightMode = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(DARK_MODE_KEY, DARK_MODE_DEFAULT);
@@ -55,8 +68,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onContentChanged() {
-        super.onContentChanged();
-        Log.d(LOG_SETTINGS, "test");
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Log.d(LOG_SETTINGS, "Changed a setting");
+        Toast toast = Toast.makeText(this, "Setting changed:" + " " + key, Toast.LENGTH_SHORT);
+        toast.show();
+        checkDarkMode(this);
     }
 }

@@ -130,7 +130,5 @@ public class PokemonActivity extends AppCompatActivity {
 
     public void onPrevious(View view) { getPokemon(urlPrevious); }
 
-    public void goBack(View view) {
-        finish();
-    }
+    public void goBack(View view) { finish(); }
 }
