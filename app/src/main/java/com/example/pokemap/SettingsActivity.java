@@ -2,10 +2,8 @@ package com.example.pokemap;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -19,6 +17,9 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
 
     private final static String DARK_MODE_KEY = "dark_mode_preference";
     private final static Boolean DARK_MODE_DEFAULT = false;
+
+    private final static String SOUND_KEY = "Sound";
+    private final static Boolean SOUND_DEFAULT = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,15 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
+    }
+
+    public static boolean checkSound(Context context) {
+        // check if sound is on
+        Log.d(LOG_SETTINGS, "checking sound setting");
+
+        boolean soundStatus = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(SOUND_KEY, SOUND_DEFAULT);
+
+        return soundStatus;
     }
 
     @Override

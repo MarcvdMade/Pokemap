@@ -12,13 +12,14 @@
         android:id="@+id/goBackBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:onClick="goBack"
         android:text="@string/btnBack"
         app:backgroundTint="@color/light_red"
         app:layout_constraintBottom_toTopOf="@+id/pokemonView"
+        app:layout_constraintEnd_toStartOf="@+id/PokeExplainTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/btnBack" />
@@ -26,11 +27,7 @@
     <LinearLayout
         android:id="@+id/pageBtnLayout"
         android:layout_width="417dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="1dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +38,11 @@
         <Button
             android:id="@+id/previousBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:onClick="onPrevious"
             android:text="@string/previousBtn" />
@@ -49,7 +50,11 @@
         <Button
             android:id="@+id/nextBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:onClick="onNext"
             android:text="@string/nextBtn" />
@@ -68,5 +73,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goBackBtn" />
+
+    <TextView
+        android:id="@+id/PokeExplainTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/explainText"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/goBackBtn"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

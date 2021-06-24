@@ -2,13 +2,16 @@ package com.example.pokemap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PokemonActivity extends AppCompatActivity {
+public class PokemonActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private String url = "https://pokeapi.co/api/v2/pokemon?limit=20";
     private String urlNext;
@@ -43,6 +46,8 @@ public class PokemonActivity extends AppCompatActivity {
         pokemonList = new ArrayList<>();
 
         ListView pokemonView = findViewById(R.id.pokemonView);
+
+        pokemonView.setOnItemClickListener(this);
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pokemonList);
 
@@ -131,4 +136,19 @@ public class PokemonActivity extends AppCompatActivity {
     public void onPrevious(View view) { getPokemon(urlPrevious); }
 
     public void goBack(View view) { finish(); }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d(POKEMON_LOG, pokemonList.get(position));
+
+        Toast toast = new Toast(this);
+        toast.setText("you clicked " + pokemonList.get(position));
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
+
+        // handle map pin point
+        Intent i = new Intent(this, MapsActivity.class);
+        i.putExtra("POKEMON_NAME", pokemonList.get(position));
+        startActivity(i);
+    }
 }

@@ -26,4 +26,8 @@
     <string name="nextBtn">Next</string>
     <string name="previousBtn">Previous</string>
     <string name="app_settings">App</string>
+    <string name="mapBtn">Map</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="explainText">Click a pokemon to add to the map!</string>
+    <string name="soundSwitch">Sound</string>
 </resources>

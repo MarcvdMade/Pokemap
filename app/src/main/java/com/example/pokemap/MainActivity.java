@@ -13,7 +13,7 @@ import android.util.Log;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    private final static int DISPLAY_COUNT = 4000;
+    private final static int DISPLAY_COUNT = 3000;
     private final static String LOADING_LOG = "loading-log";
 
     @Override
