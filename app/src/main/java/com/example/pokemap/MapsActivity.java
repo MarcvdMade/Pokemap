@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.pokemap.databinding.ActivityMapsBinding;
@@ -68,6 +69,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
+                Log.d(MAP_LOG, "Location callback");
                 if (locationResult == null) {
                     Log.d(MAP_LOG, "No result");
                     return;
@@ -131,15 +133,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             String pokemonName = getIntent().getStringExtra("POKEMON_NAME");
 
                             if (pokemonName != null) {
-                                mMap.addMarker(new MarkerOptions().position(current).title(pokemonName));
+                                mMap.addMarker(new MarkerOptions().position(current).title(pokemonName).icon(BitmapDescriptorFactory.fromResource(R.drawable.pokemarker)));
                             }
                         } else {
                             Log.d(MAP_LOG, "Location not found");
                         }
 
                         // start update location
-//                        requestingLocationUpdate = true;
-//                        startLocationUpdates();
+                        requestingLocationUpdate = true;
+                        startLocationUpdates();
                     }
                 });
     }

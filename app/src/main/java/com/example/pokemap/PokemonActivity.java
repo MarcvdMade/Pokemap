@@ -1,9 +1,15 @@
 package com.example.pokemap;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,10 +38,14 @@ public class PokemonActivity extends AppCompatActivity implements AdapterView.On
     private String url = "https://pokeapi.co/api/v2/pokemon?limit=20";
     private String urlNext;
     private String urlPrevious;
-    private final static String POKEMON_LOG = "Pokemon-API";
+    private final static String POKEMON_LOG = "pokemon-log";
 
     private ArrayList<String> pokemonList;
     private ArrayAdapter<String> adapter;
+
+    // wifi
+    private ConnectivityManager connectivityManager;
+    private NetworkInfo wifi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +63,13 @@ public class PokemonActivity extends AppCompatActivity implements AdapterView.On
 
         pokemonView.setAdapter(adapter);
 
-        getPokemon(url);
+        if (checkWifi()) {
+            getPokemon(url);
+        }
     }
 
     private void getPokemon(String url) {
+
 //        start request queue
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -131,9 +144,47 @@ public class PokemonActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
-    public void onNext(View view) { getPokemon(urlNext); }
+    private boolean checkWifi() {
+        connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        wifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-    public void onPrevious(View view) { getPokemon(urlPrevious); }
+        if (wifi.isConnected()) {
+            return true;
+        } else {
+            showWifiMessage();
+            return false;
+        }
+    }
+
+    private void showWifiMessage() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Please connect to the internet to use this app!")
+                    .setCancelable(false).setPositiveButton("Open wifi settings", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+
+            builder.show();
+    }
+
+    public void onNext(View view) {
+        if (checkWifi()) {
+            getPokemon(urlNext);
+        }
+    }
+
+    public void onPrevious(View view) {
+        if (checkWifi()) {
+            getPokemon(urlPrevious);
+        }
+    }
 
     public void goBack(View view) { finish(); }
 
@@ -150,5 +201,11 @@ public class PokemonActivity extends AppCompatActivity implements AdapterView.On
         Intent i = new Intent(this, MapsActivity.class);
         i.putExtra("POKEMON_NAME", pokemonList.get(position));
         startActivity(i);
+    }
+
+    @Override
+    protected void onRestart() {
+        checkWifi();
+        super.onRestart();
     }
 }
